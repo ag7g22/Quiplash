@@ -1,0 +1,17 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "FUNCTIONS_WORKER_RUNTIME": "python",
+    "AzureWebJobsStorage": "",
+    "AzureCosmosDBConnectionString": "AccountEndpoint=https://cosmos-ag7g22-2425.documents.azure.com:443/;AccountKey=x050irjvqOVfA8BJwFVHoxwipJUaBrC1e1z6tgqJGmCwUZAnSRImzhb7LmEP3lP8bEHKZFyVlTwRACDb3bMpmg==;",
+    "DatabaseName" : "quiplash",
+    "PlayerContainerName" : "player",
+    "PromptContainerName" : "prompt",
+    "DeploymentURL" : "https://quiplash-ag7g22.azurewebsites.net",
+    "FunctionAppKey" : "lQOC7EeaE8BfjBquU0MkamaybpEp7daTWLUdKZO9OW5XAzFu1irtKg==",
+    "TranslationEndpoint": "https://quiplash-ag7g22-translation-service.cognitiveservices.azure.com/",
+    "TranslationKey": "4YUjs5WUU8XrDcsvc1iramgyA7KdzoCfu0rMUe7ukOkPCpXSGSWyJQQJ99AJACmepeSXJ3w3AAAbACOG6xCx",
+    "OAIEndpoint" : "https://quiplash-ag7g22-openai.openai.azure.com/",
+    "OAIKey" : "82u14E4conDpYSi2b7POE4SjhjFP1QQGoRJS2zqs2kP1hCukjCeXJQQJ99AJACmepeSXJ3w3AAABACOGRKF0"
+  }
+}
