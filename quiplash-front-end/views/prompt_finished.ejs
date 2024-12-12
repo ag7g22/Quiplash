@@ -1,0 +1,50 @@
+<!-- players and audience suggest prompts (these will be then used as prompts combined with random prompts from the API) -->
+<div class="text-center mb-4">
+    <!-- Display current user -->
+    <div class="user-role">
+        <strong>ROUND {{server_state.round}} | {{user_state.username}} ({{user_state.role}})</strong>
+    </div>
+
+    <div>
+        <div class="mb-3 text-center">
+            <div v-if="prompt_state.state == 0" class="grey-box">
+                <strong>Think of a funny question or prompt!</strong>  
+            </div>
+            <div v-if="prompt_state.state == 1" class="fail-box">
+                <strong>Error: Player does not exist.</strong>  
+            </div>
+            <div v-if="prompt_state.state == 2" class="fail-box">
+                <strong>Prompt less than 20 characters or more than 100 characters.</strong>  
+            </div>
+            <div v-if="prompt_state.state == 3" class="fail-box">
+                <strong>Unsupported language.</strong>  
+            </div>
+            <div v-if="prompt_state.state == 4" class="success-box">
+                <strong>Waiting for everyone else's prompts...</strong>  
+            </div>
+        </div>
+
+        <div>
+            <input type="text" class="form-control" v-model="promptSuggestion" required>
+        </div>
+
+        <!-- Submit prompt -->
+        <div>
+            <button class="btn btn-lg btn-primary" @click="sendPrompt()">Done</button>
+            <div v-if="user_state.role == 'ADMIN'">
+                <div v-if="prompt_state.everyone_answered == true">
+                    <button class="btn btn-lg btn-primary" @click="admin('finish-prompts')">Next</button>
+                </div>
+                <div v-if="prompt_state.everyone_answered == false">
+                    <button class="btn btn-lg btn-secondary">Next</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="debug">
+    <p><strong>Debug information:</strong> Server state: {{server_state.state}} | Game state: {{user_state.state}} | Prompt state: {{prompt_state.state}}, {{prompt_state.everyone_answered}}</p>
+</div>

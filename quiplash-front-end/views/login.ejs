@@ -1,0 +1,62 @@
+<!-- LOGIN PAGE -->
+<div class="d-flex justify-content-center align-items-center min-vh-90">
+    <div class="card p-4 shadow-lg">
+      <h3 class="text-center mb-4">Lobby</h3>
+      <form>
+        <!-- Username Field -->
+        <div class="mb-3 text-center">
+          <label for="username" class="form-label">Username</label>
+          <input type="text" class="form-control" v-model="username" placeholder="Enter your username" required>
+        </div>
+
+        <!-- Password Field -->
+        <div class="mb-3 position-relative text-center">
+            <label for="username" class="form-label">Password</label>
+            <input type="text" class="form-control" v-model="password" placeholder="Enter your password" required>
+        </div>
+
+        <!-- Option to either register OR login -->
+        <div class="d-flex justify-content-between">
+            <button class="btn btn-lg btn-primary" @click="login()">Login</button>
+            <button class="btn btn-lg btn-primary" @click="register()">Register</button>
+        </div>
+      </form>
+
+
+        <!-- Indicator to client -->
+        <div v-if="client_state.login == null" class="grey-box">
+            Register or login.
+        </div>
+        <div v-if="client_state.login == 0" class="success-box">
+            Successfully Registered, you can login.
+        </div>
+        <div v-if="client_state.login == 1" class="fail-box">
+            Failed to register: Username already exists
+        </div>
+        <div v-if="client_state.login == 2" class="fail-box">
+            Failed to register: Username less than 5 characters or more than 15 characters
+        </div>
+        <div v-if="client_state.login == 3" class="fail-box">
+            Failed to register: Password less than 10 characters or more than 20 characters
+        </div>
+        <div v-if="client_state.login == 4" class="fail-box">
+            Failed to login: Username or password incorrect
+        </div>
+        <div v-if="client_state.login == 5" class="fail-box">
+            Failed to login: User has already logged in.
+        </div>
+
+    </div>
+
+</div>
+
+<div class="text-center mb-4">
+    <button class="btn btn-lg btn-light" @click="initDisplay()">Display</button>
+</div>
+
+
+
+<div class="debug">
+    <p><strong>Debug information:</strong> Server state: {{server_state.state}} | Connection state: {{client_state.state}}
+     | Login state: {{client_state.login}}</p>
+</div>

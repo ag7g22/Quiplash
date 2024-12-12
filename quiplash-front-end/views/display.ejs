@@ -1,0 +1,38 @@
+<div>
+    <!-- Put user in lobby -->
+    <div v-if="server_state.state == 0"> 
+        <%- include('joining'); -%>
+    </div>
+
+    <!-- Start prompts -->
+    <div v-else-if="server_state.state == 1"> 
+        <%- include('prompts'); -%>
+    </div>
+
+    <!-- Answer stage -->
+    <div v-else-if="server_state.state == 2"> 
+        <%- include('answers_waiting'); -%>
+    </div>
+
+    <!-- Voting stage -->
+    <div v-else-if="server_state.state == 3"> 
+        <%- include('vote_waiting'); -%>
+    </div>
+
+    <!-- Vote results -->
+    <div v-else-if="server_state.state == 4"> 
+        <%- include('vote_results'); -%>
+    </div>
+
+    <!-- Round Scores -->
+    <div v-else-if="server_state.state == 5"> 
+        <%- include('round_scores'); -%>
+    </div>
+
+    <!-- GAME OVER -->
+    <div v-else-if="server_state.state == 6"> 
+        <%- include('game_over'); -%>
+    </div>
+
+    <button class="btn btn-lg btn-danger" @click="removeDisplay()">Leave Display</button>
+</div>

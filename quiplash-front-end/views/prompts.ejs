@@ -1,0 +1,55 @@
+<!-- players and audience suggest prompts (these will be then used as prompts combined with random prompts from the API) -->
+<div class="text-center mb-4">
+    <!-- Display current admin -->
+    <div class="user-role">
+        <div v-if="user_state.username != null">
+            <strong>ROUND {{server_state.round}} | {{user_state.username}} ({{user_state.role}})</strong>
+        </div>
+        <div v-else>
+            <strong>ROUND {{server_state.round}} | MAIN DISPLAY</strong>
+        </div>
+    </div>
+
+    <!-- Prompt Field -->
+    <div class="mb-3 text-center">
+        <div v-if="user_state.username != null">
+            <div v-if="prompt_state.state == 0" class="grey-box">
+                <strong>Think of a funny question or prompt!</strong>  
+            </div>
+            <div v-if="prompt_state.state == 1" class="fail-box">
+                <strong>Error: Player does not exist.</strong>  
+            </div>
+            <div v-if="prompt_state.state == 2" class="fail-box">
+                <strong>Prompt less than 20 characters or more than 100 characters.</strong>  
+            </div>
+            <div v-if="prompt_state.state == 3" class="fail-box">
+                <strong>Unsupported language.</strong>  
+            </div>
+
+            <div>
+                <input type="text" class="form-control" v-model="promptSuggestion" required>
+            </div>
+        
+            <!-- Submit prompt -->
+            <div>
+            <button class="btn btn-lg btn-primary" @click="sendPrompt()">Done</button>
+            </div>
+
+        </div>
+        <div v-else class="row">
+            <div class="grey-box">
+                <strong>{{display.prompt_num}} prompts sent.</strong>  
+            </div>
+            <div v-for="user of display.promptsSent" class="mb-3 text-center">
+                <div class="user">
+                    <strong>{{user}} sent a prompt!</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="debug">
+    <p><strong>Debug information:</strong> Server state: {{server_state.state}} | Game state: {{user_state.state}} | Prompt state: {{prompt_state.state}}, {{prompt_state.everyone_answered}}</p>
+</div>

@@ -1,0 +1,28 @@
+<!-- voting results (show votes and points for this prompt) -->
+<div class="text-center mb-4">
+    <div class="user-role">
+        <div v-if="user_state.username != null">
+            <strong>ROUND {{server_state.round}} SCORES</strong>
+        </div>
+        <div v-else>
+            <strong>ROUND {{server_state.round}} SCORES | MAIN DISPLAY</strong>
+        </div>
+    </div>
+
+    <!-- SCORE LIST -->
+    <div class="row">
+        <div v-for="user of server_state.leaderboard" class="mb-3 text-center">
+            <div class="user">
+                <strong>{{user[1].username}} | SCORE: {{user[1].round_score}}</strong>
+            </div>
+        </div>
+    </div>  
+
+    <div class="text-center mb-4" v-if="user_state.role == 'ADMIN'">
+        <button class="btn btn-lg btn-primary" @click="admin('finish-round-scores')">Next</button>
+     </div>
+
+</div>
+<div class="debug">
+    <p><strong>Debug information:</strong> Server state: {{server_state.state}} | Game state: {{user_state.state}}</p>
+</div>

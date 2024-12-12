@@ -1,0 +1,51 @@
+<!-- Waiting for votes -->
+<div class="text-center mb-4">
+    <!-- Display current user -->
+    <div class="user-role">
+        <div v-if="user_state.username != null">
+            <strong>ROUND {{server_state.round}} | {{user_state.username}} ({{user_state.role}})</strong>
+        </div>
+        <div v-else>
+            <strong>ROUND {{server_state.round}} | MAIN DISPLAY</strong>
+        </div>
+    </div>
+
+    <div class="mb-3 text-center">
+        <div class="grey-box">
+            <strong>{{server_state.prompt_vote.prompt}}</strong>  
+        </div>
+    </div>
+
+    <div class="mb-3 text-center">
+        <!-- Vote 1 -->
+        <div class="row">
+            <div v-if="user_state.username != null">
+                <strong>{{server_state.prompt_vote.player_1.username}}</strong>   
+            </div>
+            <button class="btn btn-lg btn-dark">{{server_state.prompt_vote.player_1.answer}}</button>
+        </div>
+        
+        <!-- Vote 2 -->
+        <div class="row">
+            <div v-if="user_state.username != null">
+                <strong>{{server_state.prompt_vote.player_2.username}}</strong>   
+            </div>
+            <button class="btn btn-lg btn-dark">{{server_state.prompt_vote.player_2.answer}}</button>
+        </div>
+    </div>
+
+    <div v-if="user_state.username == server_state.prompt_vote.player_1.username">
+        <strong>You can't vote for your own answer!</strong>
+    </div>
+    <div v-else-if="user_state.username == server_state.prompt_vote.player_2.username">
+        <strong>You can't vote for your own answer!</strong>
+    </div>
+    <div v-else="user_state.username == server_state.prompt_vote.player_2.username">
+        <strong>Waiting for players to vote...</strong>
+    </div>
+
+</div>
+
+<div class="debug">
+    <p><strong>Debug information:</strong> Server state: {{server_state.state}} | Game state: {{user_state.state}}</p>
+</div>

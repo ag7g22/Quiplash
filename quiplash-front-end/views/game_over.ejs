@@ -1,0 +1,71 @@
+<!-- end of game (show final scores) -->
+<div class="text-center mb-4">
+    <div class="user-role">
+        <div v-if="user_state.username != null">
+            <strong>GAME OVER!</strong>
+        </div>
+        <div v-else>
+            <strong>GAME OVER! | MAIN DISPLAY</strong>
+        </div>
+    </div>
+
+    <div class="row">
+        <p><strong>GAME LEADERBOARD:</strong></p>
+        <div v-for="user of server_state.leaderboard" class="col-sm-2 text-center">
+            <div class="user">
+                <strong>{{user[1].username}} | SCORE: {{user[1].total_score}}</strong>
+            </div>
+        </div>
+    </div> 
+
+    <!-- SCORE LIST -->
+    <div class="text-center mb-4">
+        <p><strong>OVERALL PODIUM:</strong></p>
+        <div class="row">
+            <div class="user-gold">
+                <strong>GOLD</strong>
+            </div>
+            <div v-for="user of podium.gold" class="col-sm-2 text-center">
+                <div class="user-podium">
+                    <strong>{{user.username}}</strong>
+                    <strong>PPGR: {{ (user.total_score / user.games_played).toFixed(2) }}</strong>
+                </div>
+            </div>
+        </div> 
+    
+        <div class="row">
+            <div class="user-silver">
+                <strong>SILVER</strong>
+            </div>
+            <div v-for="user of podium.silver" class="col-sm-2 text-center">
+                <div class="user-podium">
+                    <strong>{{user.username}}</strong>
+                    <strong>PPGR: {{ (user.total_score / user.games_played).toFixed(2) }}</strong>
+                </div>
+            </div>
+        </div> 
+
+        <div class="row">
+            <div class="user-bronze">
+                <strong>BRONZE</strong>
+            </div>
+            <div v-for="user of podium.bronze" class="col-sm-2 text-center">
+                <div class="user-podium">
+                    <strong>{{user.username}}</strong>
+                    <strong>PPGR: {{ (user.total_score / user.games_played).toFixed(2) }}</strong>
+                </div>
+            </div>
+        </div> 
+
+
+    </div>
+
+    <div v-if="user_state.username != null">
+        <button class="btn btn-lg btn-danger"  @click="logout()">Home</button>
+    </div>
+
+
+</div>
+<div class="debug">
+    <p><strong>Debug information:</strong> Server state: {{server_state.state}} | Game state: {{user_state.state}}</p>
+</div>

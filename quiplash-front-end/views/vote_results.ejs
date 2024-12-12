@@ -1,0 +1,74 @@
+<!-- vote results -->
+<div class="text-center mb-4">
+    <div class="user-role">
+        <div v-if="user_state.username != null">
+            <strong>ROUND {{server_state.round}} VOTE RESULTS</strong>
+        </div>
+        <div v-else>
+            <strong>ROUND {{server_state.round}} VOTE RESULTS | MAIN DISPLAY</strong>
+        </div>
+    </div>
+
+    <div class="mb-3 text-center">
+        <div class="grey-box">
+            <strong>{{server_state.prompt_vote.prompt}}</strong>  
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+    <!-- Vote 1 -->
+    <div>
+        <div class="user-role">
+            <strong>{{server_state.prompt_vote.player_1.username}} | VOTES: {{server_state.prompt_vote.player_1.vote_count}}</strong>
+            <div v-if="user_state.username == null">
+                <strong>+ {{server_state.prompt_vote.player_1.round_score}} POINTS!</strong>
+            </div>
+        </div>
+        <div class="grey-box">
+            <strong>{{server_state.prompt_vote.player_1.answer}}</strong>
+        </div>
+
+        <!-- Voter list -->
+        <div class="row">
+            <div v-for="voter of server_state.prompt_vote.player_1.votes" class="col-sm-2 text-center">
+                <div class="user">
+                    <strong>{{voter}}</strong>
+                </div>
+            </div>
+        </div>  
+
+    </div>
+
+    <!-- Vote 2 -->
+    <div>
+        <div class="user-role">
+            <strong>{{server_state.prompt_vote.player_2.username}} | VOTES: {{server_state.prompt_vote.player_2.vote_count}}</strong>
+            <div v-if="user_state.username == null">
+                <strong>+ {{server_state.prompt_vote.player_2.round_score}} POINTS!</strong>
+            </div>
+        </div>
+        <div class="grey-box">
+            <strong>{{server_state.prompt_vote.player_1.answer}}</strong>
+        </div>
+
+        <!-- Voter list -->
+        <div class="row">
+            <div v-for="voter of server_state.prompt_vote.player_2.votes" class="col-sm-2 text-center">
+                <div class="user">
+                    <strong>{{voter}}</strong>
+                </div>
+            </div>
+        </div>  
+
+     </div>
+</div>
+
+<div class="text-center mb-4" v-if="user_state.role == 'ADMIN'">
+    <button class="btn btn-lg btn-primary" @click="admin('finish-vote')">Next</button>
+ </div>
+
+<div class="debug">
+    <p><strong>Debug information:</strong> Server state: {{server_state.state}} | Game state: {{user_state.state}}</p>
+</div>

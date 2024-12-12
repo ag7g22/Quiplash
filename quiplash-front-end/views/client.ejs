@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+
+    <%- include('header'); -%>
+
+    <h2 class="title">QUIPLASH!</h2>
+
+    <div id="game">
+
+        <!-- Error Display -->
+        <div v-if="error" class="alert alert-danger">
+            <strong>Error: </strong> {{error}}
+        </div>
+
+        <!-- Connecting to the server -->
+        <div v-if="client_state.state === false">
+            <%- include('loading'); -%>
+        </div>
+
+        <!-- When connected go to login page -->
+        <div v-else-if="client_state.state == -1">
+            <%- include('display'); -%>
+        </div>
+
+        <!-- When connected go to login page -->
+        <div v-else-if="client_state.state == 0">
+            <%- include('login'); -%>
+        </div>
+
+        <!-- Client can access these pages once connected -->
+        <div v-else-if="client_state.state == 1">
+
+            <!-- Put user in lobby -->
+            <div v-if="user_state.state == 0"> 
+                <%- include('joining'); -%>
+            </div>
+
+            <!-- Start prompts -->
+            <div v-else-if="user_state.state == 1"> 
+                <%- include('prompts'); -%>
+            </div>
+
+            <!-- Waiting screen for prompts -->
+            <div v-else-if="user_state.state == 2"> 
+                <%- include('prompt_finished'); -%>
+            </div>
+
+            <!-- Answer the prompts -->
+            <div v-else-if="user_state.state == 3"> 
+                <%- include('answers'); -%>
+            </div>
+
+            <!-- Waiting for the prompt answers -->
+            <div v-else-if="user_state.state == 4"> 
+                <%- include('answers_waiting'); -%>
+            </div>
+
+            <!-- Voting the prompt answers -->
+            <div v-else-if="user_state.state == 5"> 
+                <%- include('voting'); -%>
+            </div>
+
+            <!-- Voting the prompt answers -->
+            <div v-else-if="user_state.state == 6"> 
+                <%- include('vote_waiting'); -%>
+            </div>
+
+            <!-- Vote results -->
+            <div v-else-if="user_state.state == 7"> 
+                <%- include('vote_results'); -%>
+            </div>
+
+            <!-- Round scores -->
+            <div v-else-if="user_state.state == 8"> 
+                <%- include('round_scores'); -%>
+            </div>
+
+            <!-- Game over -->
+            <div v-else-if="user_state.state == 9"> 
+                <%- include('game_over'); -%>
+            </div>
+
+        </div>
+
+    </div>
+
+    <%- include('footer'); -%>
+
+</html>

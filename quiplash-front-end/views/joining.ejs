@@ -1,0 +1,67 @@
+<!-- Waiting for players -->
+<div class="text-center mb-4">
+    <!-- Display current admin -->
+    <div v-for="user of users" v-if="user.role == 'ADMIN'">
+        <div class="user-role">
+            <div v-if="user_state.username != null">
+                <strong>ADMIN {{user.username}}'s LOBBY</strong>
+            </div>
+            <div v-else>
+                <strong>MAIN DISPLAY | ADMIN {{user.username}}'s LOBBY</strong>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mb-4">
+        <!-- Player list -->
+        <div class="row">
+            <div class="user-role">
+                <strong>PLAYERS</strong>
+            </div>
+            <p><strong>Waiting for players ...</strong></p>
+            <div v-for="user of users" v-if="user.role != 'AUDIENCE'" class="col-sm-2 text-center">
+                <div class="user">
+                    <strong>{{user.username}}</strong>
+                </div>
+            </div>
+        </div> 
+    
+        <!-- Audience list -->
+        <div class="row">
+            <div class="user-role">
+                <strong>AUDIENCE</strong>
+            </div>
+            <div v-for="user of users" v-if="user.role == 'AUDIENCE'" class="col-sm-2 text-center">
+                <div class="user">
+                    <strong>{{user.username}}</strong>
+                </div>
+            </div>
+        </div> 
+    </div>
+
+    <div>
+        <div v-if="user_state.username != null">
+            <div class="row">
+                <div v-if="user_state.role == 'ADMIN'">
+                    <div v-if="user_count >= 3">
+                        <button class="btn btn-lg btn-success" @click="admin('start')">Start Game</button>
+                    </div>
+                    <div v-if="user_count < 3">
+                        <button class="btn btn-lg btn-secondary">Start Game</button>
+                    </div>
+                </div>
+                <button class="btn btn-lg btn-danger" @click="logout()">Logout</button>
+            </div>
+        </div>
+        <div v-else class="row">
+            <div class="user-role">
+                <strong>JOIN THE GAME: {{url}} </strong>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="debug">
+    <p><strong>Debug information:</strong> Server state: {{server_state.state}} | Game state: {{user_state.state}} | Login state: {{client_state.state}}</p>
+</div>

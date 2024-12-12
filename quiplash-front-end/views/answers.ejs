@@ -1,0 +1,28 @@
+<!-- players give answers to prompts (2 players to 1 prompt. Players will either get 1 prompt or 2 prompts in a round depending on number of players) -->
+<div class="text-center mb-4">
+    <!-- Display current admin -->
+    <div class="user-role">
+        <strong>ROUND {{server_state.round}} | {{user_state.username}} ({{user_state.role}})</strong>
+    </div>
+
+    <div class="mb-3 text-center">
+        <div class="grey-box">
+            <strong>{{user_state.current_prompt}}</strong>  
+        </div>
+    </div>
+
+    <!-- Answer Field -->
+    <div>
+        <input type="text" class="form-control" v-model="promptAnswer" required>
+    </div>
+
+    <!-- Submit Answer -->
+     <div>
+        <button class="btn btn-lg btn-primary" @click="sendAnswer()">Done</button>
+     </div>
+
+</div>
+
+<div class="debug">
+    <p><strong>Debug information:</strong> Server state: {{server_state.state}} | Game state: {{user_state.state}}</p>
+</div>

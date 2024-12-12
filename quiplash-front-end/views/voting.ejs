@@ -1,0 +1,34 @@
+<!-- players and audience vote on answers to each prompt (cycle through all prompts in the round) -->
+<div class="text-center mb-4">
+    <!-- Display current admin -->
+    <div class="user-role">
+        <strong>ROUND {{server_state.round}} | {{user_state.username}} ({{user_state.role}}), vote for the funniest answer!</strong>
+    </div>
+
+    <div class="mb-3 text-center">
+        <div class="grey-box">
+            <strong>{{server_state.prompt_vote.prompt}}</strong>  
+        </div>
+    </div>
+
+    <div class="mb-3 text-center">
+        <!-- Vote 1 -->
+        <div class="row">
+            <strong>{{server_state.prompt_vote.player_1.username}}</strong>
+            <button class="btn btn-lg btn-light" @click="sendVote(server_state.prompt_vote.player_1.username)">
+                {{server_state.prompt_vote.player_1.answer}}</button>
+        </div>
+
+        <!-- Vote 2 -->
+        <div class="row">
+            <strong>{{server_state.prompt_vote.player_2.username}}</strong>
+            <button class="btn btn-lg btn-light" @click="sendVote(server_state.prompt_vote.player_2.username)">
+                {{server_state.prompt_vote.player_2.answer}}</button>
+        </div>
+    </div>
+
+</div>
+
+<div class="debug">
+    <p><strong>Debug information:</strong> Server state: {{server_state.state}} | Game state: {{user_state.state}}</p>
+</div>
